@@ -61,7 +61,19 @@ then
   sudo mkdir /mnt/efi
 fi
 
+#format partitions
+mkfs.ext4 /dev/$rootPartition
+
+mkswap /dev/$swapPartition
+swapon /dev/$swapPartition
+
+mkfs.fat /dev/$efiPartition
+
 #mount partitions
 mount /dev/$rootPartition /mnt
 mount /dev/$efiPartition /mnt/efi
+
+
+
+
 
