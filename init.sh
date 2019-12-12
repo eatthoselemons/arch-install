@@ -73,7 +73,13 @@ mkfs.fat /dev/$efiPartition
 mount /dev/$rootPartition /mnt
 mount /dev/$efiPartition /mnt/efi
 
+#Install essential packages
+pacstrap /mnt base linux linux-firmware vim dhcpd
 
+#fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+
+echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
 
 
 
