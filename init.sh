@@ -9,7 +9,7 @@ else
 fi
 
 internet=$(ip link)
-echo $internet
+#echo $internet
 if [[ "$internet" =~ ^.*([state UP])+.*$ ]]
 then
   echo "Internet confirmed"
