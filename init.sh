@@ -51,6 +51,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
     # confirm
   d # delete parittion
     # confirm
+  g # make GPT partition table
   n # new partition
     # partition number 1
     # default - start at beginning of disk 
