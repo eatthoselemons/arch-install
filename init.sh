@@ -33,9 +33,9 @@ else
   exit 1
 fi
 
-let efiPartition=${disk}1
-let swapParitition=${disk}2
-let rootParitition=${disk}3
+efiPartition=${disk}1
+swapParitition=${disk}2
+rootParitition=${disk}3
 
 # stolen from "How to create and format partition using a bash script" from superUser
 # to create the partitions programatically (rather than manually)
@@ -44,7 +44,7 @@ let rootParitition=${disk}3
 # document what we're doing in-line with the actual commands
 # Note that a blank line (commented as "defualt" will send a empty
 # line terminated with a newline to take the fdisk default.
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/${disk}
   d # delete partition
     # confirm
   d # delete partition (maybe if not just continues)
