@@ -96,16 +96,16 @@ then
 fi
 
 #format partitions
-mkfs.ext4 /dev/$rootPartition
+mkfs.ext4 /dev/${rootPartition}
 
-mkswap /dev/$swapPartition
-swapon /dev/$swapPartition
+mkswap /dev/${swapPartition}
+swapon /dev/${swapPartition}
 
-mkfs.fat /dev/$efiPartition
+mkfs.fat /dev/${efiPartition}
 
 #mount partitions
-mount /dev/$rootPartition /mnt
-mount /dev/$efiPartition /mnt/efi
+mount /dev/${rootPartition} /mnt
+mount /dev/${efiPartition} /mnt/efi
 
 #Install essential packages
 pacstrap /mnt base linux linux-firmware vim dhcpd
