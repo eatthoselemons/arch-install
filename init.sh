@@ -56,6 +56,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${TGTDEV}
     # partition number 1
     # default - start at beginning of disk 
   +500M # 500 MB boot parttion
+  y # y in case it asks if we want to remove the previous partition table
   n # new partition
     # partion number 2
     # default, start immediately after preceding partition
