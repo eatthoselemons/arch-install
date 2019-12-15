@@ -34,8 +34,8 @@ else
 fi
 
 efiPartition=${disk}1
-swapParitition=${disk}2
-rootParitition=${disk}3
+swapPartition=${disk}2
+rootPartition=${disk}3
 
 # stolen from "How to create and format partition using a bash script" from superUser
 # to create the partitions programatically (rather than manually)
