@@ -109,7 +109,7 @@ mount /dev/${rootPartition} /mnt
 mount /dev/${efiPartition} /mnt/efi
 
 #Install essential packages
-pacstrap /mnt base linux linux-firmware vim dhcpd
+pacstrap /mnt base linux linux-firmware vim dhcpcd
 
 #fstab
 genfstab -U /mnt >> /mnt/etc/fstab
