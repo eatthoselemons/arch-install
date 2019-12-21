@@ -65,6 +65,15 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/${disk}
     # partion number 3
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
+  t # change partition table type
+  1 # select partition 1
+  1 # set partition 1 to EFI
+  t # change partition table type
+  2 # select partition 2
+  19 # set partition to swap
+  t # change partition table type
+  3 # select partition 3
+  20 # change partition to linux filesystem
   p # print the in-memory partition table
   w # write the partition table
 EOF
