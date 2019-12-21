@@ -20,6 +20,7 @@ read regularUsername
 
 useradd $regularUsername
 passwd $regularUsername
+usermod -aG sudo $regularUsername
 
 echo "what processor do you have AMD or Intel?"
 read cpu
