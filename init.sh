@@ -23,9 +23,9 @@ timedatectl set-ntp true
 
 echo "==========================================="
 
-if sudo fdisk -l >> /dev/null;
+if fdisk -l >> /dev/null;
 then
-  sudo fdisk -l
+  fdisk -l
   echo "Which disk to use? input format 'sd'letter or sd[a-z]"
   read disk
 else
@@ -62,6 +62,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/${disk}
     # default, start immediately after preceding partition
   +2G # 2 Gigabyte swap partition
   n # new partition
+    # partion number 3
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
   p # print the in-memory partition table
@@ -78,21 +79,21 @@ echo "==========================================="
 #create mnt directory
 if [[ ! -d /mnt ]];
 then
-  sudo mkdir /mnt
+  mkdir /mnt
 fi
 if [[ ! -d /mnt ]];
 then
-  sudo mkdir /mnt
+  mkdir /mnt
 fi
 
 #create efi directory
 if [[ ! -d /mnt/efi ]];
 then
-  sudo mkdir /mnt/efi
+  mkdir /mnt/efi
 fi
 if [[ ! -d /mnt/efi ]];
 then
-  sudo mkdir /mnt/efi
+  mkdir /mnt/efi
 fi
 
 #format partitions
