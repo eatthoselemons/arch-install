@@ -1,7 +1,11 @@
 echo "you need region and city the regions and city can be found at: /usr/share/zoneinfo/region/city"
 
+ls /usr/share/zoneinfo
+echo "regions ^^"
 echo "What Region are you in?"
 read region
+ls /usr/share/zoneinfo/$region
+echo "cities ^^"
 echo "What city are you in?"
 read city
 
@@ -31,7 +35,7 @@ then
   echo "retype processor or unsupported processor"
   exit 1
 else
-  echo "you have $processor"
+  echo "you have $cpu"
 fi
 
 #echo "/usr/share/zoneinfo/$region/$city"
@@ -51,11 +55,28 @@ echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1 localhost" >> /etc/hosts
 echo "217.0.0.1 $hostname.localdomain $hostname" >> /etc/hosts
 
+if [[ ! -f /efi/loader/entries/entry.conf/ ]]
+then
+  mkdir -p /efi/loader/entries
+fi
+
+
+echo "default  arch" > /efi/loader/loader.conf
+echo "timeout  4" >> /efi/loader/loader.conf
+echo "console-mode max" >> /efi/loader/loader.conf
+echo "editor   no" >> /efi/loader/loader.conf
+
+
+echo "title   Arch Linux" > /efi/loader/entries/arch.conf
+echo "linux   /vmlinuz-linux" >> /efi/loader/entries/arch.conf
+echo "initrd  /initramfs-linux.img" >> /efi/loader/entries/arch.conf
+echo "options root=/dev/=arch_os rw" >> /efi/loader/entries/arch.conf
+
 if [[ $processor == 1 ]]
 then
   pacman -S intel-ucode
   bootctl --path=/efi install
-  echo "initrd  /intel-ucode.img" >> /efi/loader/entries/entry.conf
+  echo "initrd  /intel-ucode.img" >> /efi/loader/entries/arch.conf
   cp -a /boot/vmlinuz-linux /efi
   cp -a /boot/initramfs-linux.img /efi
   cp -a /boot/initramfs-linux-fallback.img /efi
@@ -66,7 +87,7 @@ if [[ $processor == 2 ]]
 then
   pacman -S amd-ucode
   bootctl --path=/efi install
-  echo "initrd  /amd-ucode.img" >> /efi/loader/entries/entry.conf
+  echo "initrd  /amd-ucode.img" >> /efi/loader/entries/arch.conf
   cp -a /boot/vmlinuz-linux /efi
   cp -a /boot/initramfs-linux.img /efi
   cp -a /boot/initramfs-linux-fallback.img /efi
