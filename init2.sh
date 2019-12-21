@@ -70,7 +70,7 @@ echo "editor   no" >> /efi/loader/loader.conf
 echo "title   Arch Linux" > /efi/loader/entries/arch.conf
 echo "linux   /vmlinuz-linux" >> /efi/loader/entries/arch.conf
 echo "initrd  /initramfs-linux.img" >> /efi/loader/entries/arch.conf
-echo "options root=/dev/=arch_os rw" >> /efi/loader/entries/arch.conf
+echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
 
 if [[ $processor == 1 ]]
 then
