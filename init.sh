@@ -18,6 +18,7 @@ else
   exit 1
 fi
 
+wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
 
 timedatectl set-ntp true
 

@@ -15,6 +15,12 @@ read hostname
 echo "set root password"
 passwd
 
+echo "what is the user account name?"
+read regularUsername
+
+useradd $regularUsername
+passwd $regularUsername
+
 echo "what processor do you have AMD or Intel?"
 read cpu
 
@@ -93,3 +99,5 @@ then
   cp -a /boot/initramfs-linux-fallback.img /efi
   cp -a /boot/amd-ucode.img /efi
 fi
+
+echo "Your system is all setup! run 'shutdown now' to shutdown. Remove the installation media and then start the system"
