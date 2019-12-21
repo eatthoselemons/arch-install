@@ -121,6 +121,10 @@ mount /dev/${efiPartition} /mnt/efi
 pacstrap /mnt base linux linux-firmware vim dhcpcd
 
 #fstab
+if [[ -f /mnt/etc/fstab ]]
+then
+  rm /mnt/etc/fstab
+fi
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
