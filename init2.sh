@@ -20,7 +20,9 @@ read regularUsername
 
 useradd $regularUsername
 passwd $regularUsername
-usermod -aG sudo $regularUsername
+echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
+mkdir /home/user
+chown user:user /home/user
 
 echo "what processor do you have AMD or Intel?"
 read cpu

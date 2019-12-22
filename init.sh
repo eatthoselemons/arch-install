@@ -119,7 +119,7 @@ mount /dev/${rootPartition} /mnt
 mount /dev/${efiPartition} /mnt/efi
 
 #Install essential packages
-pacstrap /mnt base linux linux-firmware vim dhcpcd sudo iputils plasma-desktop
+pacstrap --noconfirm /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
 
 #fstab
 if [[ -f /mnt/etc/fstab ]]
