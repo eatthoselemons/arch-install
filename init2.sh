@@ -21,8 +21,16 @@ read regularUsername
 useradd $regularUsername
 passwd $regularUsername
 echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
-mkdir /home/user
-chown user:user /home/user
+mkdir /home/$regularUsername
+chown $regularUsername:$regularUsername /home/$regularUsername
+
+pacman -S wget
+
+cd /home/$regularUsername/
+
+wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/firstStartup.sh
+
+
 
 echo "what processor do you have AMD or Intel?"
 read cpu
@@ -108,4 +116,4 @@ fi
 
 sudo systemctl enable dhcpcd.service
 
-echo "Your system is all setup! run 'shutdown now' to shutdown. Remove the installation media and then start the system"
+echo "Your system is all setup! run 'exit' then 'shutdown now' to shutdown. Remove the installation media and then start the system \n if you want my config then run 'bash firstStartup.sh' when you first log in"

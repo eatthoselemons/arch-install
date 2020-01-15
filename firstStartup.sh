@@ -1,11 +1,8 @@
-sudo systemctl enable dhcpcd.service
-sudo systemctl start dhcpcd.service
-
 echo "installing xorg"
 sudo pacman -S --noconfirm xorg xorg-xinit
 
-echo "installing kde plasma"
-sudo pacman -S --noconfirm plasma-desktop sddm git qt
+echo "installing xmonad"
+sudo pacman -S --noconfirm xmonad xmonad-contrib xterm
 
 mkdir ~/git
 cd ~/git
