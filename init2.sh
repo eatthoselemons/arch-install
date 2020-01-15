@@ -106,4 +106,6 @@ then
   cp -a /boot/amd-ucode.img /efi
 fi
 
+sudo systemctl enable dhcpcd.service
+
 echo "Your system is all setup! run 'shutdown now' to shutdown. Remove the installation media and then start the system"
