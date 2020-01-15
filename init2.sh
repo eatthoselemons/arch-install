@@ -52,7 +52,37 @@ then
   echo "retype processor or unsupported processor"
   exit 1
 else
-  echo "you have $cpu"
+  echo "you have cpu $cpu"
+fi
+
+
+echo "what graphics do you have AMD, nVidia, or Intel?"
+read gpu
+
+# graphics 0=unknown 1=intel 2=amd 3=nvidia
+let graphics=0
+
+if [[ "$gpu" =~ ^[Ii][Nn][Tt][Ee][Ll]$ ]]
+then
+  graphics=1
+fi
+
+if [[ "$gpu" =~ ^[Aa][Mm][Dd]$ ]]
+then
+  graphics=2
+fi
+
+if [[ "$gpu" =~ ^[Nn][Vv][Ii][Dd][Ii][Aa]$ ]]
+then
+  graphics=3
+fi
+
+if [[ $graphics == 0 ]]
+then
+  echo "retype gpu or unsupported gpu"
+  exit 1
+else
+  echo "you have gpu $gpu"
 fi
 
 #echo "/usr/share/zoneinfo/$region/$city"
@@ -112,6 +142,21 @@ then
   cp -a /boot/initramfs-linux.img /efi
   cp -a /boot/initramfs-linux-fallback.img /efi
   cp -a /boot/amd-ucode.img /efi
+fi
+
+if [[ $graphics == 1 ]]
+then
+  pacman -S xf86-video-intel
+fi
+
+if [[ $graphics == 2 ]]
+then
+  pacman -S xf86-video-amd
+fi
+
+if [[ $graphics == 3 ]]
+then
+  pacman -S xf86-video-nouveau
 fi
 
 sudo systemctl enable dhcpcd.service
