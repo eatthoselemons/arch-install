@@ -81,6 +81,9 @@ echo "linux   /vmlinuz-linux" >> /efi/loader/entries/arch.conf
 echo "initrd  /initramfs-linux.img" >> /efi/loader/entries/arch.conf
 echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
 
+
+reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
 if [[ $processor == 1 ]]
 then
   pacman -S intel-ucode

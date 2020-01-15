@@ -123,7 +123,7 @@ pacman -Sy reflector
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install essential packages
-pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
+pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils reflector
 
 #fstab
 if [[ -f /mnt/etc/fstab ]]
