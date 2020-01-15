@@ -118,8 +118,12 @@ mkfs.fat /dev/${efiPartition}
 mount /dev/${rootPartition} /mnt
 mount /dev/${efiPartition} /mnt/efi
 
+pacman -Sy reflector
+
+reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
 #Install essential packages
-pacstrap --noconfirm /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
+pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
 
 #fstab
 if [[ -f /mnt/etc/fstab ]]
