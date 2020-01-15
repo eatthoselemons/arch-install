@@ -132,6 +132,8 @@ then
 fi
 genfstab -U /mnt >> /mnt/etc/fstab
 
+mv init2.sh /mnt/root/
+
 echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
 
 
