@@ -102,11 +102,15 @@ echo "127.0.0.1 localhost" > /etc/hosts
 echo "::1 localhost" >> /etc/hosts
 echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 
-if [[ ! -f /efi/loader/entries/entry.conf/ ]]
+if [[ ! -d /efi/loader/entries ]]
 then
   mkdir -p /efi/loader/entries
 fi
 
+if [[ ! -d /efi/loader/kernels ]]
+then
+  mkdir -p /efi/EFI/kernels
+fi
 
 echo "default  arch" > /efi/loader/loader.conf
 echo "timeout  4" >> /efi/loader/loader.conf
@@ -115,8 +119,8 @@ echo "editor   no" >> /efi/loader/loader.conf
 
 
 echo "title   Arch Linux" > /efi/loader/entries/arch.conf
-echo "linux   /vmlinuz-linux" >> /efi/loader/entries/arch.conf
-echo "initrd  /initramfs-linux.img" >> /efi/loader/entries/arch.conf
+echo "linux   EFI/kernels/vmlinuz-linux" >> /efi/loader/entries/arch.conf
+echo "initrd  EFI/kernels/initramfs-linux.img" >> /efi/loader/entries/arch.conf
 echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
 
 
@@ -126,23 +130,27 @@ if [[ $processor == 1 ]]
 then
   pacman -S intel-ucode
   bootctl --path=/efi install
-  echo "initrd  /intel-ucode.img" >> /efi/loader/entries/arch.conf
-  cp -a /boot/vmlinuz-linux /efi
-  cp -a /boot/initramfs-linux.img /efi
-  cp -a /boot/initramfs-linux-fallback.img /efi
-  cp -a /boot/intel-ucode.img /efi
+  echo "initrd  EFI/arch/intel-ucode.img" >> /efi/loader/entries/arch.conf
+  cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+  cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+  cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+  cp -a /boot/intel-ucode.img /efi/EFI/kernels
 fi
 
 if [[ $processor == 2 ]]
 then
   pacman -S amd-ucode
   bootctl --path=/efi install
-  echo "initrd  /amd-ucode.img" >> /efi/loader/entries/arch.conf
-  cp -a /boot/vmlinuz-linux /efi
-  cp -a /boot/initramfs-linux.img /efi
-  cp -a /boot/initramfs-linux-fallback.img /efi
-  cp -a /boot/amd-ucode.img /efi
+  echo "initrd  EFI/arch/amd-ucode.img" >> /efi/loader/entries/arch.conf
+  cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+  cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+  cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+  cp -a /boot/amd-ucode.img /efi/EFI/kernels
 fi
+
+mount --bind /efi/EFI/kernels /boot
+
+echo "/efi/EFI/kernels /boot none defaults,bind 0 0" >> /etc/fstab
 
 if [[ $graphics == 1 ]]
 then
