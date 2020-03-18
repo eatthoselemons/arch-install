@@ -130,22 +130,22 @@ if [[ $processor == 1 ]]
 then
   pacman -S intel-ucode
   bootctl --path=/efi install
-  echo "initrd  EFI/arch/intel-ucode.img" >> /efi/loader/entries/arch.conf
-  cp -a /boot/vmlinuz-linux /efi/EFI/kernels
-  cp -a /boot/initramfs-linux.img /efi/EFI/kernels
-  cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
-  cp -a /boot/intel-ucode.img /efi/EFI/kernels
+  echo "initrd  EFI/kernels/intel-ucode.img" >> /efi/loader/entries/arch.conf
+ # cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+ # cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+ # cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+ # cp -a /boot/intel-ucode.img /efi/EFI/kernels
 fi
 
 if [[ $processor == 2 ]]
 then
   pacman -S amd-ucode
   bootctl --path=/efi install
-  echo "initrd  EFI/arch/amd-ucode.img" >> /efi/loader/entries/arch.conf
-  cp -a /boot/vmlinuz-linux /efi/EFI/kernels
-  cp -a /boot/initramfs-linux.img /efi/EFI/kernels
-  cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
-  cp -a /boot/amd-ucode.img /efi/EFI/kernels
+  echo "initrd  EFI/kernels/amd-ucode.img" >> /efi/loader/entries/arch.conf
+ # cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+ # cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+ # cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+ # cp -a /boot/amd-ucode.img /efi/EFI/kernels
 fi
 
 mount --bind /efi/EFI/kernels /boot
@@ -169,4 +169,6 @@ fi
 
 sudo systemctl enable dhcpcd.service
 
-echo "Your system is all setup! run 'exit' then 'shutdown now' to shutdown. Remove the installation media and then start the system \n if you want my config then run 'bash firstStartup.sh' when you first log in"
+echo "Your system is all setup! run 'exit' then 'shutdown now' to shutdown. Remove the installation media and then start the system"
+echo "for xmonad, sound configuration, terminal size changes, and no mouse acceleration run 'bash firstStartup.sh' when you log in"
+echo "if you want my full linux config then run 'bash eatthoselemonsLinuxConfig.sh' after running 'firstStartup.sh'"
