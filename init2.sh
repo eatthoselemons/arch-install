@@ -124,7 +124,7 @@ echo "initrd  EFI/kernels/initramfs-linux.img" >> /efi/loader/entries/arch.conf
 echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
 
 
-reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 if [[ $processor == 1 ]]
 then
