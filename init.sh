@@ -1,3 +1,8 @@
+# error out if there is an error in the script
+trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit ${s}'
+set -uo pipefail
+trap "${trap_msg}" ERR
+
 # check for UEFI files existance as recommended by
 # the arch wiki
 if [[ -d /sys/firmware/efi/efivars ]];

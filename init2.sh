@@ -1,3 +1,8 @@
+# error out if there is an error in the script
+trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit ${s}'
+set -uo pipefail
+trap "${trap_msg}" ERR
+
 echo "you need region and city the regions and city can be found at: /usr/share/zoneinfo/region/city"
 
 # grab zone info for clock

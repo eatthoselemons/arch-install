@@ -1,3 +1,9 @@
+# error out if there is an error in the script
+trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit ${s}'
+set -uo pipefail
+trap "${trap_msg}" ERR
+
+
 # install graphics system
 echo "installing xorg"
 sudo pacman -S --noconfirm xorg xorg-xinit
