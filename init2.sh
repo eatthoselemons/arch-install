@@ -150,7 +150,7 @@ fi
 
 mount --bind /boot /efi/EFI/kernels
 
-echo "/efi/EFI/kernels /boot none defaults,bind 0 0" >> /etc/fstab
+echo "/boot /efi/EFI/kernels none defaults,bind 0 0" >> /etc/fstab
 
 if [[ $graphics == 1 ]]
 then

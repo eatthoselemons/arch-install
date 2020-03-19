@@ -109,10 +109,7 @@ then
 fi
 
 #format partitions
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mkfs.ext4 /dev/${rootPartition}
-  y # accept 
-EOF
-# mkfs.ext4 /dev/${rootPartition}
+mkfs.ext4 -F /dev/${rootPartition}
 
 mkswap /dev/${swapPartition}
 swapon /dev/${swapPartition}
