@@ -3,10 +3,12 @@
 This is an install script for installing arch and getting everything set up
 
 Last tested Dec, 2019
+Broken March, 2020 - current arch forum question to fix errors
+error: "reboot and select proper boot device"
 
 # Usage:
 ### Get Arch installer
-grab the arch iso from one of the mirrors an example url is provided below
+grab the arch iso from one of the iso mirrors. An example url is provided below
 http://mirror.arizona.edu/archlinux/iso/
 
 ### Install to a USB
@@ -29,7 +31,7 @@ Then run `bash init.sh` and follow the prompts
 ### After the First One Finishes
 
 chroot into the new system with `arch-chroot /mnt` and run:
-`bash /home/init2.sh`
+`bash /root/init2.sh`
 
 Follow the prompts and once that script finishes then you will be all setup!
 
@@ -38,6 +40,11 @@ Follow the prompts and once that script finishes then you will be all setup!
 Shutdown the machine with `shutdown now`
 Remove the USB
 Restart into Arch Linux!
+
+### First boot
+
+To setup xorg and display manager as well as a better terminal than the default run:
+`bash firstStartup.sh`
 
 
 # Notes
