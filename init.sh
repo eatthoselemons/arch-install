@@ -1,15 +1,13 @@
 # check for UEFI files existance as recommended by
 # the arch wiki
-# **NOTE** exit 1 is commented out as sometimes manual verification
-# shows the system is in UEFI but this if still fails
-if [[ -f /sys/firmware/efi/efivars ]];
+if [[ -d /sys/firmware/efi/efivars ]];
 then
   echo "uefi confirmed"
   let uefi=1
 else
   echo "Not UEFI exiting...."
   let uefi=0
-#  exit 1
+  exit 1
 fi
 
 # check for existance of internet based on if an interface is "UP"
