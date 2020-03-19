@@ -126,14 +126,15 @@ echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
 
 reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
+# cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+# cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+# cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+
 if [[ $processor == 1 ]]
 then
   pacman -S intel-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/intel-ucode.img" >> /efi/loader/entries/arch.conf
- # cp -a /boot/vmlinuz-linux /efi/EFI/kernels
- # cp -a /boot/initramfs-linux.img /efi/EFI/kernels
- # cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
  # cp -a /boot/intel-ucode.img /efi/EFI/kernels
 fi
 
@@ -142,9 +143,6 @@ then
   pacman -S amd-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/amd-ucode.img" >> /efi/loader/entries/arch.conf
- # cp -a /boot/vmlinuz-linux /efi/EFI/kernels
- # cp -a /boot/initramfs-linux.img /efi/EFI/kernels
- # cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
  # cp -a /boot/amd-ucode.img /efi/EFI/kernels
 fi
 
