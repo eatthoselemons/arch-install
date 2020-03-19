@@ -114,7 +114,7 @@ mkfs.ext4 -F /dev/${rootPartition}
 mkswap /dev/${swapPartition}
 swapon /dev/${swapPartition}
 
-mkfs.fat -F /dev/${efiPartition}
+mkfs.fat /dev/${efiPartition}
 
 #mount partitions
 mount /dev/${rootPartition} /mnt
