@@ -27,6 +27,7 @@ echo "==========================================="
 if fdisk -l >> /dev/null;
 then
   fdisk -l
+  printf "\n\n===========================================\n"
   echo "Which disk to use? input format 'sd'letter or sd[a-z]"
   read disk
 else
