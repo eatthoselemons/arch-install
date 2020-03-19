@@ -62,10 +62,12 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/${disk}
     # partion number 2
     # default, start immediately after preceding partition
   +2G # 2 Gigabyte swap partition
+  y # y in case it asks if we want to remove the previous partition table
   n # new partition
     # partion number 3
     # default, start immediately after preceding partition
     # default, extend partition to end of disk
+  y # y in case it asks if we want to remove the previous partition table
   t # change partition table type
   1 # select partition 1
   1 # set partition 1 to EFI
@@ -107,7 +109,10 @@ then
 fi
 
 #format partitions
-mkfs.ext4 /dev/${rootPartition}
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mkfs.ext4 /dev/${rootPartition}
+  y # accept 
+EOF
+# mkfs.ext4 /dev/${rootPartition}
 
 mkswap /dev/${swapPartition}
 swapon /dev/${swapPartition}
@@ -120,7 +125,7 @@ mount /dev/${efiPartition} /mnt/efi
 
 pacman -Sy reflector
 
-reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install essential packages
 pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils reflector

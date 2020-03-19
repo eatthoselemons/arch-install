@@ -148,7 +148,7 @@ then
  # cp -a /boot/amd-ucode.img /efi/EFI/kernels
 fi
 
-mount --bind /efi/EFI/kernels /boot
+mount --bind /boot /efi/EFI/kernels
 
 echo "/efi/EFI/kernels /boot none defaults,bind 0 0" >> /etc/fstab
 
@@ -159,7 +159,7 @@ fi
 
 if [[ $graphics == 2 ]]
 then
-  pacman -S xf86-video-amd
+  pacman -S xf86-video-amdgpu
 fi
 
 if [[ $graphics == 3 ]]
