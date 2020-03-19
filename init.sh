@@ -22,7 +22,8 @@ wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.
 
 timedatectl set-ntp true
 
-echo "==========================================="
+printf "\n===========================================\n"
+echo "now running fdisk"
 
 if fdisk -l >> /dev/null;
 then
