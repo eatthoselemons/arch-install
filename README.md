@@ -3,6 +3,7 @@
 This is an install script for installing arch and getting everything set up
 
 Last tested Dec, 2019
+
 Broken March, 2020 - current arch forum question to fix errors
 error: "reboot and select proper boot device"
 
