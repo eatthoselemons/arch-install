@@ -1,3 +1,7 @@
+# check for UEFI files existance as recommended by
+# the arch wiki
+# **NOTE** exit 1 is commented out as sometimes manual verification
+# shows the system is in UEFI but this if still fails
 if [[ -f /sys/firmware/efi/efivars ]];
 then
   echo "uefi confirmed"
@@ -8,6 +12,7 @@ else
 #  exit 1
 fi
 
+# check for existance of internet based on if an interface is "UP"
 internet=$(ip link)
 #echo $internet
 if [[ "$internet" =~ ^.*([state UP])+.*$ ]]
@@ -18,13 +23,16 @@ else
   exit 1
 fi
 
+# download the next step in the install process
 wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
 
+# set time to use network time protocol
 timedatectl set-ntp true
 
 printf "\n===========================================\n"
 echo "now running fdisk"
 
+# select disk to be overwritten
 if fdisk -l >> /dev/null;
 then
   fdisk -l
@@ -85,9 +93,6 @@ EOF
 
 
 
-
-
-
 echo "==========================================="
 
 #create mnt directory
@@ -100,7 +105,8 @@ then
   mkdir /mnt
 fi
 
-#create efi directory
+# create efi directory
+# needed for UEFI boot
 if [[ ! -d /mnt/efi ]];
 then
   mkdir /mnt/efi
@@ -113,6 +119,7 @@ fi
 #format partitions
 mkfs.ext4 -F /dev/${rootPartition}
 
+# enable and turn on swap
 mkswap /dev/${swapPartition}
 swapon /dev/${swapPartition}
 
@@ -122,8 +129,10 @@ mkfs.fat /dev/${efiPartition}
 mount /dev/${rootPartition} /mnt
 mount /dev/${efiPartition} /mnt/efi
 
+# install reflector for checking package repos
 pacman -Sy reflector
 
+# check latest 100 package mirrors and sort by the fastest
 reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install essential packages
@@ -136,9 +145,8 @@ then
 fi
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# move downloaded next step to a defined location 
+# that can be reached from arch-chroot
 mv init2.sh /mnt/root/
 
 echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
-
-
-
