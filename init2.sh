@@ -24,11 +24,9 @@ passwd
 echo "what is the user account name?"
 read regularUsername
 
-useradd $regularUsername
+useradd -m $regularUsername
 passwd $regularUsername
 echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
-mkdir /home/$regularUsername
-chown $regularUsername:$regularUsername /home/$regularUsername
 
 # make sure system has wget
 pacman -S wget
