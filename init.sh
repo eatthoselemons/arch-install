@@ -100,7 +100,9 @@ echo "==========================================="
 
 # create mount directory and
 # create efi directory needed for UEFI boot
-mkdir -p /mnt/efi
+# no need to create mount directory as they are in
+# arch by default
+# mkdir -p /mnt/efi
 
 #format partitions
 mkfs.ext4 -F /dev/${rootPartition}
