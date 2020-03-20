@@ -42,7 +42,7 @@ read cpu
 
 # processor 0=unknown 1=intel 2=amd
 # case insensitive regex selection
-let processor=0
+processor=0
 if [[ "$cpu" =~ ^[Aa][Mm][Dd]$ ]]
 then
   processor=2
@@ -67,7 +67,7 @@ read gpu
 
 # graphics 0=unknown 1=intel 2=amd 3=nvidia
 # case insensitive regex selection
-let graphics=0
+graphics=0
 
 if [[ "$gpu" =~ ^[Ii][Nn][Tt][Ee][Ll]$ ]]
 then
