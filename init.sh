@@ -50,9 +50,9 @@ efiPartition=${disk}1
 swapPartition=${disk}2
 rootPartition=${disk}3
 
-# unmount any paritions that are mounted
+# unmount any partitions that are mounted
 mounts=$(mount -l)
-if [[ $mounts =~ ^.*$rootParition.*$ ]]
+if [[ $mounts =~ ^.*$rootPartition.*$ ]]
 then
   echo "root already mounted, unmounting"
   umount $rootPartition
@@ -81,7 +81,7 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/${disk}
     # confirm
   d # delete partition (maybe if not just continues)
     # confirm
-  d # delete parittion
+  d # delete partition
     # confirm
   g # make GPT partition table
   n # new partition
