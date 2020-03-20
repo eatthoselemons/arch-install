@@ -55,14 +55,14 @@ mounts=$(mount -l)
 if [[ $mounts =~ ^.*$rootPartition.*$ ]]
 then
   echo "root already mounted, unmounting"
-  umount $rootPartition
+  umount /dev/$rootPartition
 else
   echo "no need to unmount root"
 fi
 if [[ $mounts =~ ^.*$efiPartition.*$ ]]
 then
   echo "efi already mounted, unmounting"
-  umount $efiPartition
+  umount /dev/$efiPartition
 else
   echo "no need to unmount efi"
 fi
