@@ -23,7 +23,7 @@ passwd
 
 echo "what is the user account name?"
 read regularUsername
-if id "$regularUsername" >/dev/null 2>&1
+if id "$regularUsername"
 then
   useradd -m $regularUsername
   passwd $regularUsername
