@@ -18,29 +18,6 @@ read city
 echo "What is the system hostname?"
 read hostname
 
-echo "set root password"
-passwd
-
-echo "what is the user account name?"
-read regularUsername
-if ! id "$regularUsername"
-then
-  useradd -m $regularUsername
-  passwd $regularUsername
-  echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
-else
-  echo "user already exists"
-fi
-
-# make sure system has wget
-pacman -S wget reflector
-
-cd /home/$regularUsername/
-
-wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/firstStartup.sh
-
-
-
 echo "what processor do you have AMD or Intel?"
 read cpu
 
@@ -95,6 +72,27 @@ then
 else
   echo "you have gpu $gpu"
 fi
+echo "set root password"
+passwd
+
+echo "what is the user account name?"
+read regularUsername
+if ! id "$regularUsername"
+then
+  useradd -m $regularUsername
+  passwd $regularUsername
+  echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
+else
+  echo "user already exists"
+fi
+
+# make sure system has wget
+pacman -S wget reflector
+
+cd /home/$regularUsername/
+
+wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/firstStartup.sh
+
 
 # set clock zone
 ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime
