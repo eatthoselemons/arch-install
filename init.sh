@@ -51,7 +51,18 @@ swapPartition=${disk}2
 rootPartition=${disk}3
 
 # unmount any partitions that are mounted
+# unmount /mnt/efi (efiPartition) before
+# /mnt due to /mnt/efi relying on /mnt so /mnt is
+# busy if you try to mount
 mounts=$(mount -l)
+swaps=$(cat /proc/swaps)
+if [[ $mounts =~ ^.*$efiPartition.*$ ]]
+then
+  echo "efi already mounted, unmounting"
+  umount /dev/$efiPartition
+else
+  echo "no need to unmount efi"
+fi
 if [[ $mounts =~ ^.*$rootPartition.*$ ]]
 then
   echo "root already mounted, unmounting"
@@ -59,12 +70,12 @@ then
 else
   echo "no need to unmount root"
 fi
-if [[ $mounts =~ ^.*$efiPartition.*$ ]]
+if [[ $swaps =~ ^.*partition.*$ ]]
 then
-  echo "efi already mounted, unmounting"
-  umount /dev/$efiPartition
+  echo "removing swap"
+  swapoff -a
 else
-  echo "no need to unmount efi"
+  echo "no swap"
 fi
 
 
