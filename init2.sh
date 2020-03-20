@@ -122,16 +122,19 @@ then
 fi
 
 # systemd boot loader config
-echo "default  arch" > /efi/loader/loader.conf
-echo "timeout  4" >> /efi/loader/loader.conf
-echo "console-mode max" >> /efi/loader/loader.conf
-echo "editor   no" >> /efi/loader/loader.conf
+cat << EOF > /efi/loader/loader.conf
+default arch
+timeout 4
+console-mode max
+editor no
+EOF
 
-
-echo "title   Arch Linux" > /efi/loader/entries/arch.conf
-echo "linux   EFI/kernels/vmlinuz-linux" >> /efi/loader/entries/arch.conf
-echo "initrd  EFI/kernels/initramfs-linux.img" >> /efi/loader/entries/arch.conf
-echo "options root=/dev/sda3 rw" >> /efi/loader/entries/arch.conf
+cat << EOF > /efi/loader/entries/arch.conf
+title Arch Linux
+linux EFI/kernels/vmlinuz-linux
+initrd EFI/kernels/initramfs-linux.img
+options root=/dev/sda3 rw
+EOF
 
 # grab top 100 mirrors and sort by how fast they are
 reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
