@@ -23,10 +23,14 @@ passwd
 
 echo "what is the user account name?"
 read regularUsername
-
-useradd -m $regularUsername
-passwd $regularUsername
-echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
+if id "$regularUsername" >/dev/null 2>&1
+then
+  useradd -m $regularUsername
+  passwd $regularUsername
+  echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
+else
+  echo "user already exists"
+fi
 
 # make sure system has wget
 pacman -S wget
