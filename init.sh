@@ -17,7 +17,6 @@ fi
 
 # check for existance of internet based on if an interface is "UP"
 internet=$(ip link)
-#echo $internet
 if [[ "$internet" =~ ^.*([state UP])+.*$ ]]
 then
   echo "Internet confirmed"
@@ -50,6 +49,25 @@ fi
 efiPartition=${disk}1
 swapPartition=${disk}2
 rootPartition=${disk}3
+
+# unmount any paritions that are mounted
+mounts=$(mount -l)
+if [[ $mounts =~ ^.*$rootParition.*$ ]]
+then
+  echo "root already mounted, unmounting"
+  umount $rootPartition
+else
+  echo "no need to unmount root"
+fi
+if [[ $mounts =~ ^.*$efiPartition.*$ ]]
+then
+  echo "efi already mounted, unmounting"
+  umount $efiPartition
+else
+  echo "no need to unmount efi"
+fi
+
+
 
 # stolen from "How to create and format partition using a bash script" from superUser
 # to create the partitions programatically (rather than manually)
@@ -114,7 +132,9 @@ swapon /dev/${swapPartition}
 mkfs.fat /dev/${efiPartition}
 
 #mount partitions
+mkdir -p /mnt
 mount /dev/${rootPartition} /mnt
+mkdir -p /mnt/efi
 mount /dev/${efiPartition} /mnt/efi
 
 # install reflector for checking package repos
