@@ -98,26 +98,9 @@ EOF
 
 echo "==========================================="
 
-#create mnt directory
-if [[ ! -d /mnt ]];
-then
-  mkdir /mnt
-fi
-if [[ ! -d /mnt ]];
-then
-  mkdir /mnt
-fi
-
-# create efi directory
-# needed for UEFI boot
-if [[ ! -d /mnt/efi ]];
-then
-  mkdir /mnt/efi
-fi
-if [[ ! -d /mnt/efi ]];
-then
-  mkdir /mnt/efi
-fi
+# create mount directory and
+# create efi directory needed for UEFI boot
+mkdir -p /mnt/efi
 
 #format partitions
 mkfs.ext4 -F /dev/${rootPartition}
@@ -139,7 +122,7 @@ pacman -Sy reflector
 reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install essential packages
-pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils reflector
+pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
 
 #fstab
 if [[ -f /mnt/etc/fstab ]]
