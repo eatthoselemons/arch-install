@@ -33,7 +33,7 @@ else
 fi
 
 # make sure system has wget
-pacman -S wget
+pacman -S wget reflector
 
 cd /home/$regularUsername/
 
