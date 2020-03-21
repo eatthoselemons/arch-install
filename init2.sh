@@ -142,11 +142,11 @@ EOF
 reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 # manually copy the boot files from the non-UEFI location /boot
-# to the UEFI location /efi
-# superceeded by mount --bind
-# cp -a /boot/vmlinuz-linux /efi/EFI/kernels
-# cp -a /boot/initramfs-linux.img /efi/EFI/kernels
-# cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
+# to the UEFI location /efi/EFI/kernels
+# need to copy first then bind mount for further instances
+cp -a /boot/vmlinuz-linux /efi/EFI/kernels
+cp -a /boot/initramfs-linux.img /efi/EFI/kernels
+cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
 
 # grab ucode based on processor type
 if [[ $processor == 1 ]]
@@ -154,7 +154,7 @@ then
   pacman -S intel-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/intel-ucode.img" >> /efi/loader/entries/arch.conf
- # cp -a /boot/intel-ucode.img /efi/EFI/kernels
+  cp -a /boot/intel-ucode.img /efi/EFI/kernels
 fi
 
 if [[ $processor == 2 ]]
@@ -162,16 +162,16 @@ then
   pacman -S amd-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/amd-ucode.img" >> /efi/loader/entries/arch.conf
- # cp -a /boot/amd-ucode.img /efi/EFI/kernels
+  cp -a /boot/amd-ucode.img /efi/EFI/kernels
 fi
 
 # bind /boot/* to /efi/EFI/kernels/
 # /efi/EFI/kernels is where the systemd boot loader
 # is looking for the boot files
-mount --bind /boot /efi/EFI/kernels
+mount --bind /efi/EFI/kernels /boot
 
 # save bind mount for future reboots
-echo "/boot /efi/EFI/kernels none defaults,bind 0 0" >> /etc/fstab
+echo "/efi/EFI/kernels /boot none defaults,bind 0 0" >> /etc/fstab
 
 # install graphics driver based on previously input gpu manufacturer
 if [[ $graphics == 1 ]]
