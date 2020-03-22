@@ -18,7 +18,7 @@ sudo pacman -S --noconfirm git
 
 # allow 'startx' to start the xmonad display manager
 echo "#!/bin/bash" > ~/.xinitrc
-echo "exec xmonad" >> ~/.xinitr
+echo "exec xmonad" >> ~/.xinitrc
 
 # disable mouse acceleration
 echo "disabling mouse acceleration"
@@ -47,13 +47,12 @@ if [[ -d ~/git/base16-termite ]]
 then
   echo "removing existing termite color scheme directories"
   rm -rf ~/git/base16-termite
-  rmdir ~/git/base16-termite
 fi
 git clone https://github.com/khamer/base16-termite.git
 
 # move monokai termite theme to the termite config dir
 echo "creating termite config dir and moving monokai into that dir"
-mkdir -p ~/.config/termite/config
+mkdir -p ~/.config/termite
 cp ~/git/base16-termite/themes/base16-monokai.config ~/.config/termite/config
 
 # increase default termite size from 9 (default) to 13
