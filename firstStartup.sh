@@ -12,9 +12,9 @@ sudo pacman -S --noconfirm xorg xorg-xinit dmenu
 echo "installing xmonad"
 sudo pacman -S --noconfirm xmonad xmonad-contrib xterm
 
-# install git
-echo "installing git"
-sudo pacman -S --noconfirm git
+# install other useful programs
+echo "installing other programs, git, firefox etc"
+sudo pacman -S --noconfirm git firefox
 
 # allow 'startx' to start the xmonad display manager
 echo "#!/bin/bash" > ~/.xinitrc
