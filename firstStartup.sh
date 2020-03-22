@@ -22,7 +22,7 @@ echo "exec xmonad" >> ~/.xinitrc
 
 # disable mouse acceleration
 echo "disabling mouse acceleration"
-sudo bash -c "cat << EOF > /etc/X11/xorg.conf.d/no-mouse-acceleration.conf
+sudo bash -c 'cat << EOF > /etc/X11/xorg.conf.d/no-mouse-acceleration.conf
 Section "InputClass"
   Identifier "MyMouse"
   MatchIsPointer "yes"
@@ -31,7 +31,7 @@ Section "InputClass"
   Option "AccelerationDenominator" "1"
   Option "AccelerationThreshold" "0"
 EndSection
-EOF"
+EOF'
 
 # install termite
 echo "installing termite terminal emulator"
