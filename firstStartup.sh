@@ -6,7 +6,7 @@ trap "${trap_msg}" ERR
 
 # install graphics system
 echo "installing xorg"
-sudo pacman -S --noconfirm xorg xorg-xinit
+sudo pacman -S --noconfirm xorg xorg-xinit dmenu
 
 # install display manager
 echo "installing xmonad"
