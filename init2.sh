@@ -91,7 +91,9 @@ pacman -S wget reflector
 
 cd /home/$regularUsername/
 
+echo "downloading next step, firstStartup.sh"
 wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/firstStartup.sh
+chown $regularUsername:$regularUsername /home/$regularUsername/firstStartup.sh
 
 
 # set clock zone
