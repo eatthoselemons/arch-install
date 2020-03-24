@@ -94,6 +94,8 @@ cd /home/$regularUsername/
 echo "downloading next step, firstStartup.sh"
 wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/firstStartup.sh
 chown $regularUsername:$regularUsername /home/$regularUsername/firstStartup.sh
+wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/eatthoselemonsLinuxConfig.sh
+chown $regularUsername:$regularUsername /home/$regularUsername/eatthoselemonsLinuxConfig.sh
 
 
 # set clock zone
