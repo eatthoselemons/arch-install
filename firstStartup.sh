@@ -78,6 +78,10 @@ font = Monospace 13
 scrollback_lines = 100000
 EOF
 
+echo "Getting termite files for remote sessions"
+infocmp > termite.terminfo
+echo "scp termite.terminfo to remote host and run 'tic -x termite.terminfo'"
+
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
 echo "To start a display manager run 'startx {display manager}'"
 echo "so you could run 'startx xmonad' to start the xmonad display manager"
