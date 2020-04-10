@@ -51,7 +51,7 @@ To setup xorg and display manager as well as a better terminal than the default 
 
 The default config uses termite as the terminal. Termite however isn't supported on every os by default so you will need to run `bash newSSHConnection.sh` with the server if you want to have the ssh session work correctly (one way this presents itself is that you cannot use backspace or vim doesn't show up right)
 
-example usage `bash newSSHConnection <username>@<ip-address>`
+usage `bash newSSHConnection <username>@<ip-address>`
 example: `bash newSSHConnection user@10.0.0.1`
 
 # Notes
