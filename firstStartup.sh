@@ -78,9 +78,12 @@ font = Monospace 13
 scrollback_lines = 100000
 EOF
 
-echo "Getting termite files for remote sessions"
+echo "creating file for new ssh connections to fix termite issue"
+cat << EOF >> ~/newSSHConnection.sh
 infocmp > termite.terminfo
-echo "scp termite.terminfo to remote host and run 'tic -x termite.terminfo'"
+scp termite.terminfo $1:
+ssh $1 'tic -x termite.terminfo'
+EOF
 
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
 echo "To start a display manager run 'startx {display manager}'"
