@@ -3,22 +3,6 @@ trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit 
 set -uo pipefail
 trap "${trap_msg}" ERR
 
-mkdir -p ~/git
-
-if [[ -d $HOME/git/sddm-deepin ]];
-then
-	rm -rf "$HOME/git/sddm-deepin"
-fi
-
-# install deepin
-git clone https://github.com/Match-Yang/sddm-deepin.git ~/git/sddm-deepin
-
-cd ~/git/sddm-deepin
-
-bash install.sh
-
-# install usefull utilities
-sudo pacman --noconfirm -S ripgrep
 
 # install my linux config
 # dependencies

@@ -16,9 +16,18 @@ sudo pacman -S --noconfirm xmonad xmonad-contrib xterm
 echo "installing deepin"
 sudo pacman -S --noconfirm deepin
 
+# install deepin login page
+if [[ -d $HOME/git/sddm-deepin ]];
+then
+	rm -rf "$HOME/git/sddm-deepin"
+fi
+git clone https://github.com/Match-Yang/sddm-deepin.git ~/git/sddm-deepin
+cd ~/git/sddm-deepin
+bash install.sh
+
 # install other useful programs
 echo "installing other programs, git, firefox etc"
-sudo pacman -S --noconfirm git firefox udisks2
+sudo pacman -S --noconfirm git firefox udisks2 ripgrep
 
 # allow 'startx' to start the xmonad display manager
 cat << EOF > ~/.xinitrc
@@ -71,6 +80,8 @@ echo "creating termite config dir and moving monokai into that dir"
 mkdir -p ~/.config/termite
 cp ~/git/base16-termite/themes/base16-monokai.config ~/.config/termite/config
 
+# other gree color options:
+# b1be2c, a8b14c, b7c42d
 # increase default termite size from 9 (default) to 13
 echo "increasing default terminal font size"
 cat << EOF >> ~/.config/termite/config
@@ -79,11 +90,15 @@ font = Monospace 13
 scrollback_lines = 100000
 EOF
 
+# replacing the comments with my green color
+sed -ri 's:color6\s*=\s*#[a-z0-9]{6}:color6  = #afbc2b:g' ~/.config/termite/config
+sed -ri 's:color14\s*=\s*#[a-z0-9]{6}:color14 = #afbc2b:g' ~/.config/termite/config
+
 echo "creating file for new ssh connections to fix termite issue"
 cat << EOF >> ~/newSSHConnection.sh
 infocmp > termite.terminfo
-scp termite.terminfo $1:
-ssh $1 'tic -x termite.terminfo'
+scp termite.terminfo \$1:
+ssh \$1 'tic -x termite.terminfo'
 EOF
 
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
