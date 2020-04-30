@@ -21,6 +21,11 @@ read hostname
 echo "what processor do you have AMD or Intel?"
 read cpu
 
+# read what the selected drive was to install to
+# stored file
+file="/root/rootPartition"
+rootPartition=$(cat "$file")
+
 # processor 0=unknown 1=intel 2=amd
 # case insensitive regex selection
 processor=0
@@ -139,7 +144,7 @@ cat << EOF > /efi/loader/entries/arch.conf
 title Arch Linux
 linux EFI/kernels/vmlinuz-linux
 initrd EFI/kernels/initramfs-linux.img
-options root=/dev/sda3 rw
+options root=/dev/$rootPartition rw
 EOF
 
 # grab top 100 mirrors and sort by how fast they are

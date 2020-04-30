@@ -167,5 +167,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # move downloaded next step to a defined location 
 # that can be reached from arch-chroot
 mv init2.sh /mnt/root/
+echo "$rootPartition" > /mnt/root/rootPartition
 
 echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
