@@ -104,3 +104,4 @@ EOF
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
 echo "To start a display manager run 'startx {display manager}'"
 echo "so you could run 'startx xmonad' to start the xmonad display manager"
+echo "if you need to enable termite on a remote server run: bash ~/newSSHConnection.sh <ip address>"
