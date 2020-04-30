@@ -40,13 +40,7 @@ EOF
 
 source ~/.bashrc
 
-cat << 'EOF' > ~/neovimCommands
-:call mkdir(stdpath('config'), 'p')
-:exe 'edit '.stdpath('config'). '/init.vim'
-:q
-EOF
-
-nvim -s ~/neovimCommands ~/dummyFile
+nvim -s $HOME/git/arch-install/neovimCommands
 
 cat << 'EOF' > ~/.config/nvim/init.vim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
