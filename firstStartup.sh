@@ -112,6 +112,9 @@ export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 EOF
 
+mkdir -p $HOME/.gnupg
+echo "pinentry-program /usr/bin/pinentry-curses" > $HOME/.gnupg/gpg-agent.conf
+
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
 echo "To start a display manager run 'startx {display manager}'"
 echo "so you could run 'startx xmonad' to start the xmonad display manager"
