@@ -27,7 +27,7 @@ bash install.sh
 
 # install other useful programs
 echo "installing other programs, git, firefox etc"
-sudo pacman -S --noconfirm git firefox udisks2 ripgrep
+sudo pacman -S --noconfirm git firefox udisks2 ripgrep pavucontrol
 
 # allow 'startx' to start the xmonad display manager
 cat << EOF > ~/.xinitrc
