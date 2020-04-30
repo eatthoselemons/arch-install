@@ -25,6 +25,7 @@ read cpu
 # stored file
 file="/root/rootPartition"
 rootPartition=$(cat "$file")
+rm /root/rootPartition
 
 # processor 0=unknown 1=intel 2=amd
 # case insensitive regex selection
