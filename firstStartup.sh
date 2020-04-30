@@ -27,7 +27,7 @@ bash install.sh
 
 # install other useful programs
 echo "installing other programs, git, firefox etc"
-sudo pacman -S --noconfirm git firefox udisks2 ripgrep pavucontrol
+sudo pacman -S --noconfirm git firefox udisks2 ripgrep pavucontrol gnupg
 
 # allow 'startx' to start the xmonad display manager
 cat << EOF > ~/.xinitrc
@@ -99,6 +99,17 @@ cat << EOF >> ~/newSSHConnection.sh
 infocmp > termite.terminfo
 scp termite.terminfo \$1:
 ssh \$1 'tic -x termite.terminfo'
+EOF
+
+# adding gnupg for gpg-agent to manage ssh keys
+cat << 'EOF' >> $HOME/.bashrc
+# set gpg-agent as default
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 EOF
 
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
