@@ -22,7 +22,7 @@ sudo pacman -S --noconfirm git firefox udisks2
 
 # allow 'startx' to start the xmonad display manager
 cat << EOF > ~/.xinitrc
-case "$2" in
+case "\$2" in
   xmonad)
     exec xmonad
     ;;
@@ -34,6 +34,7 @@ case "$2" in
     ;;
 esac
 EOF
+
 
 # disable mouse acceleration
 echo "disabling mouse acceleration"
