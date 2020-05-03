@@ -97,6 +97,18 @@ sed -ri 's:color14\s*=\s*#[a-z0-9]{6}:color14 = #afbc2b:g' ~/.config/termite/con
 #enabling ls colors
 echo "alias ls='ls --color=auto'" | sudo tee -a /etc/bash.bashrc
 
+# add other prompt options
+cat << EOF >> ~/.bashrc
+function defaultPrompt () {
+export PS1="\[\e[35m\]\A\[\e[m\] \[\e[37m\][\[\e[m\]\[\e[36m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\] \[\e[32m\]λ\[\e[m\] "
+}
+function simplePrompt () {
+  export PS1="[\[\e[00;34m\]\W\[\e[0m\]] \[\e[00;32m\]λ \[\e[0m\]"
+}
+
+defaultPrompt
+EOF
+
 echo "creating file for new ssh connections to fix termite issue"
 cat << EOF >> ~/newSSHConnection.sh
 infocmp > termite.terminfo
