@@ -94,6 +94,9 @@ EOF
 sed -ri 's:color6\s*=\s*#[a-z0-9]{6}:color6  = #afbc2b:g' ~/.config/termite/config
 sed -ri 's:color14\s*=\s*#[a-z0-9]{6}:color14 = #afbc2b:g' ~/.config/termite/config
 
+#enabling ls colors
+echo "alias ls='ls --color=auto'" | sudo tee -a /etc/bash.bashrc
+
 echo "creating file for new ssh connections to fix termite issue"
 cat << EOF >> ~/newSSHConnection.sh
 infocmp > termite.terminfo
