@@ -93,6 +93,8 @@ EOF
 # replacing the comments with my green color
 sed -ri 's:color6\s*=\s*#[a-z0-9]{6}:color6  = #afbc2b:g' ~/.config/termite/config
 sed -ri 's:color14\s*=\s*#[a-z0-9]{6}:color14 = #afbc2b:g' ~/.config/termite/config
+sed -ri 's:(cursor\s*)=\s*#[a-z0-9]{6}:\1= #939390' ~/.config/termite/config
+sed -ri 's:(color7\s*)=\s*#[a-z0-9]{6}:\1= #a8a9a6' ~/.config/termite/config
 
 #enabling ls colors
 echo "alias ls='ls --color=auto'" | sudo tee -a /etc/bash.bashrc
