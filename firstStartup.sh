@@ -101,11 +101,45 @@ echo "alias ls='ls --color=auto'" | sudo tee -a /etc/bash.bashrc
 
 # add other prompt options
 cat << EOF >> ~/.bashrc
+#forground terminal colors
+black=$(tput setaf 0) # \e[30m
+red=$(tput setaf 1) # \e[31m
+green=$(tput setaf 2) # \e[32m
+yellow=$(tput setaf 3) # \e[33m
+blue=$(tput setaf 4) # \e[34m
+magenta=$(tput setaf 5) # \e[35m
+cyan=$(tput setaf 6) # \e[36m
+white=$(tput setaf 7) # \e[37m
+defaultColor=$(tput setaf 9) # \e[39m
+
+#background terminal colors
+backgroundBlack=$(tput setaf 0) # \e[40m
+backgroundRed=$(tput setaf 1) # \e[41m
+backgroundGreen=$(tput setaf 2) # \e[42m
+backgroundYellow=$(tput setaf 3) # \e[43m
+backgroundBlue=$(tput setaf 4) # \e[44m
+backgroundMagenta=$(tput setaf 5) # \e[45m
+backgroundCyan=$(tput setaf 6) # \e[46m
+backgroundWhite=$(tput setaf 7) # \e[47m
+backgroundDefaultColor=$(tput setaf 9) # \e[49m
+
+# general terminal text attributes
+# if desired with a color attribute then format like:
+# \[$bright;$cyan\]
+# with the semicolon (;)
+reset=$(tput sgr0)   # \e[0m;
+bright=$(tput bold) # \e[1m;
+dim=$(tput dim) # \e[2m;
+italics=$(tput smso) # \e[3m;
+underscore=$(tput smul) # \e[4m;
+blink=$(tput blink) # \e[5m;
+
+
 function defaultPrompt () {
-export PS1="\[\e[35m\]\A\[\e[m\] \[\e[37m\][\[\e[m\]\[\e[36m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\] \[\e[32m\]λ\[\e[m\] "
+export PS1="\[$magenta\]\A\[$reset\] \[$white\][\[$reset\]\[$cyan\]\u\[$reset\]\[$white\]@\[$reset\]\[$yellow\]\h\[$reset\] \[$blue\]\w\[$reset\]\[$white\]]\[$reset\] \[$green\]λ\[$reset\] "
 }
 function simplePrompt () {
-  export PS1="[\[\e[00;34m\]\W\[\e[0m\]] \[\e[00;32m\]λ \[\e[0m\]"
+  export PS1="[\[$blue\]\W\[$reset\]] \[$green\]λ \[$reset\]"
 }
 
 defaultPrompt
