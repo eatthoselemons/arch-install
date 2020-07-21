@@ -24,6 +24,10 @@ EOF
 
 source ~/.bashrc
 
+mkdir -p ~/git
+cd ~/git
+git clone https://github.com/eatthosemeons/arch-install.git
+
 nvim -s $HOME/git/arch-install/neovimCommands
 
 cat << 'EOF' > ~/.config/nvim/init.vim
