@@ -3,6 +3,9 @@ trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit 
 set -uo pipefail
 trap "${trap_msg}" ERR
 
+# install required utilities
+echo "installing prerequisite utilities"
+sudo pacman -S --noconfirm git vim
 
 # install graphics system
 echo "installing xorg"
