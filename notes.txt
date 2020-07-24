@@ -1,0 +1,35 @@
+things to add/do:
+
+convert terminal prompt to using color names instead of hex values: 
+
+see: 
+more colors:
+https://unix.stackexchange.com/questions/124407/what-color-codes-can-i-use-in-my-ps1-prompt
+https://askubuntu.com/questions/558280/changing-colour-of-text-and-background-of-terminal
+
+color names: https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Terminfo_escape_sequences
+
+
+install mlocate and setup cron for `sudo updatedb`
+
+see: https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Terminfo_escape_sequences
+
+
+look at ncurses and dialog
+
+add progress bar to scripts:
+https://www.cyberciti.biz/faq/linux-unix-dd-command-show-progress-while-coping/
+https://askubuntu.com/questions/215505/how-do-you-monitor-the-progress-of-dd
+
+make linux-tools git repo
+
+set leader key
+
+create system yank and system paste
+https://www.reddit.com/r/neovim/comments/3fricd/easiest_way_to_copy_from_neovim_to_system/
+https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
+
+compile vim and nvim from source to add required compile features, that for some reason are not in the default package manager
+http://vimcasts.org/blog/2013/11/getting-vim-with-clipboard-support/
+
+
