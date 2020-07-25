@@ -173,15 +173,33 @@ ex ()
 if [ -f $HOME/linux-config/extra-bash ]; then
 	. $HOME/linux-config/extra-bash
 fi
+
 source /usr/share/nvm/init-nvm.sh
+
 function defaultPrompt () {
-export PS1="\[\e[35m\]\A\[\e[m\] \[\e[37m\][\[\e[m\]\[\e[36m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\] \[\e[32m\]λ\[\e[m\] "
+export PS1="\
+${purple}\A${reset}\
+${grey} [${reset}\
+${blue}\u${reset}\
+${grey}@${reset}\
+${orange}\h${reset}\
+${blue} \w${reset}\
+${grey}]${reset}\
+${green} λ ${reset}"
 }
+function simplePrompt () {
+export PS1="\
+${grey}[${reset}\
+${blue}\W${reset}\
+${grey}]${reset}\
+${green} λ ${reset}"
+}
+
 function simplePrompt () {
   export PS1="[\[\e[00;34m\]\W\[\e[0m\]] \[\e[00;32m\]λ \[\e[0m\]"
 }
 
-defaultPrompt
+splitPrompt
 # set gpg-agent as default
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
