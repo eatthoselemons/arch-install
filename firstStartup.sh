@@ -166,6 +166,12 @@ export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 EOF
 
+#setup other tools not required for install
+sudo pacman -S --noconfirm mlocate
+
+
+# mlocate database cronjob
+
 # set program for ssh key passphrase entering
 # also set the pinentry program to start in the active terminal not the first terminal
 mkdir -p $HOME/.gnupg
