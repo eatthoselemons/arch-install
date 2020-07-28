@@ -8,12 +8,12 @@ trap "${trap_msg}" ERR
 # dependencies
 sudo pacman --noconfirm -S universal-ctags neovim
 
-if [[ -d $HOME/linux-config ]];
+if [[ -d $HOME/git/linux-config ]];
 then
-	rm -rf "$HOME/linux-config"
+	rm -rf "$HOME/git/linux-config"
 fi
 
-git clone https://github.com/eatthoselemons/linux-config ~/linux-config
+git clone https://github.com/eatthoselemons/linux-config ~/git/linux-config
 
 mkdir -p ~/git
 cd ~/git
@@ -25,7 +25,7 @@ echo "adding bashrc config"
 cat << 'EOF' > ~/.config/nvim/init.vim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
-source ~/linux-config/vimrc
+source $HOME/git/linux-config/vimrc
 EOF
 
 
@@ -170,8 +170,8 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-if [ -f $HOME/linux-config/extra-bash ]; then
-	. $HOME/linux-config/extra-bash
+if [ -f $HOME/git/linux-config/extra-bash ]; then
+	. $HOME/git/linux-config/extra-bash
 fi
 
 source /usr/share/nvm/init-nvm.sh
