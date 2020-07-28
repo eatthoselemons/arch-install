@@ -174,7 +174,7 @@ if [ -f $HOME/git/linux-config/extra-bash ]; then
 	. $HOME/git/linux-config/extra-bash
 fi
 
-source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvim/init-nvim.sh
 
 function defaultPrompt () {
 export PS1="\
