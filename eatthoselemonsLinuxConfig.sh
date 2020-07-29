@@ -107,7 +107,8 @@ if ${use_color} ; then
 	else
 		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 	fi
-
+  
+  # enabling colors
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
@@ -176,6 +177,39 @@ fi
 
 source /usr/share/nvim/init-nvim.sh
 
+#forground terminal colors
+black=$(tput setaf 0) # \e[30m
+red=$(tput setaf 1) # \e[31m
+green=$(tput setaf 2) # \e[32m
+yellow=$(tput setaf 3) # \e[33m
+blue=$(tput setaf 4) # \e[34m
+purple=$(tput setaf 5) # \e[35m
+cyan=$(tput setaf 6) # \e[36m
+grey=$(tput setaf 7) # \e[37m
+defaultColor=$(tput setaf 9) # \e[39m
+
+#background terminal colors
+backgroundBlack=$(tput setaf 0) # \e[40m
+backgroundRed=$(tput setaf 1) # \e[41m
+backgroundGreen=$(tput setaf 2) # \e[42m
+backgroundYellow=$(tput setaf 3) # \e[43m
+backgroundBlue=$(tput setaf 4) # \e[44m
+backgroundPurple=$(tput setaf 5) # \e[45m
+backgroundCyan=$(tput setaf 6) # \e[46m
+backgroundGrey=$(tput setaf 7) # \e[47m
+backgroundDefaultColor=$(tput setaf 9) # \e[49m
+
+# general terminal text attributes
+# if desired with a color attribute then format like:
+# \[$bright;$cyan\]
+# with the semicolon (;)
+reset=$(tput sgr0)   # \e[0m;
+bright=$(tput bold) # \e[1m;
+dim=$(tput dim) # \e[2m;
+italics=$(tput smso) # \e[3m;
+underscore=$(tput smul) # \e[4m;
+blink=$(tput blink) # \e[5m;
+
 function defaultPrompt () {
 export PS1="\
 ${purple}\A${reset}\
@@ -195,9 +229,6 @@ ${grey}]${reset}\
 ${green} λ ${reset}"
 }
 
-function simplePrompt () {
-  export PS1="[\[\e[00;34m\]\W\[\e[0m\]] \[\e[00;32m\]λ \[\e[0m\]"
-}
 
 splitPrompt
 # set gpg-agent as default
@@ -207,12 +238,5 @@ if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
 fi
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
-
-function defaultPrompt () {
-export PS1="\[\e[35m\]\A\[\e[m\] \[\e[37m\][\[\e[m\]\[\e[36m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[34m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\] \[\e[32m\]λ\[\e[m\] "
-}
-function simplePrompt () {
-  export PS1="[\[\e[00;34m\]\W\[\e[0m\]] \[\e[00;32m\]λ \[\e[0m\]"
-}
 EOF
 source ~/.bashrc
