@@ -22,14 +22,14 @@ git clone https://github.com/eatthosemeons/arch-install.git
 nvim -s $HOME/git/arch-install/neovimCommands
 
 echo "adding bashrc config"
-cat << 'EOF' > ~/.config/nvim/init.vim
+cat << 'EOF' >> ~/.config/nvim/init.vim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source $HOME/git/linux-config/vimrc
 EOF
 
 
-cat << 'EOF' > ~/.bashrc
+cat << 'EOF' >> ~/.bashrc
 
 #
 # ~/.bashrc
