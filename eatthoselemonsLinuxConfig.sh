@@ -184,7 +184,7 @@ green=$(tput setaf 2) # \e[32m
 yellow=$(tput setaf 3) # \e[33m
 blue=$(tput setaf 4) # \e[34m
 purple=$(tput setaf 5) # \e[35m
-cyan=$(tput setaf 6) # \e[36m
+myGreenCyan=$(tput setaf 6) # \e[36m
 grey=$(tput setaf 7) # \e[37m
 defaultColor=$(tput setaf 9) # \e[39m
 
@@ -195,7 +195,7 @@ backgroundGreen=$(tput setaf 2) # \e[42m
 backgroundYellow=$(tput setaf 3) # \e[43m
 backgroundBlue=$(tput setaf 4) # \e[44m
 backgroundPurple=$(tput setaf 5) # \e[45m
-backgroundCyan=$(tput setaf 6) # \e[46m
+backgroundMyGreenCyan=$(tput setaf 6) # \e[46m
 backgroundGrey=$(tput setaf 7) # \e[47m
 backgroundDefaultColor=$(tput setaf 9) # \e[49m
 
@@ -216,10 +216,10 @@ ${purple}\A${reset}\
 ${grey} [${reset}\
 ${blue}\u${reset}\
 ${grey}@${reset}\
-${orange}\h${reset}\
+${yellow}\h${reset}\
 ${blue} \w${reset}\
 ${grey}]${reset}\
-${green} λ ${reset}"
+${myGreenCyan} λ ${reset}"
 }
 function simplePrompt () {
 export PS1="\
