@@ -48,15 +48,3 @@ Restart into Arch Linux!
 
 To setup xorg and display manager as well as a better terminal than the default run:
 `bash firstStartup.sh`
-
-The default config uses termite as the terminal. Termite however isn't supported on every os by default so you will need to run `bash newSSHConnection.sh` with the server if you want to have the ssh session work correctly (one way this presents itself is that you cannot use backspace or vim doesn't show up right)
-
-usage `bash newSSHConnection <username>@<ip-address>`
-example: `bash newSSHConnection user@10.0.0.1`
-
-# Notes
-
-Thinks to keep in mind:
-1. When asked for the disk use the format `sda` or for a regex sd[a-z]
-2. The default config uses termite as the terminal. Termite however isn't supported on every os by default so you will need to run `bash newSSHConnection.sh` with the server if you want to have the ssh session work correctly (one way this presents itself is that you cannot use backspace or vim doesn't show up right)
-
