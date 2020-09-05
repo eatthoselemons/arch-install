@@ -21,14 +21,29 @@ git clone https://github.com/eatthosemeons/arch-install.git
 
 nvim -s $HOME/git/arch-install/neovimCommands
 
-echo "adding bashrc config"
+
+echo "adding .inputrc for vi in bash"
+cat << 'EOF' >> ~/.inputrc
+set editing-mode vi
+set keymap vi
+
+set keymap vi-command
+"v": ""
+"H": "^"
+"L": "$"
+
+set keymap vi-insert
+"jk": vi-movement-mode
+EOF
+
+echo "adding nvim read of vimrc"
 cat << 'EOF' >> ~/.config/nvim/init.vim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source $HOME/git/linux-config/vimrc
 EOF
 
-
+echo "adding bashrc config" 
 cat << 'EOF' >> ~/.bashrc
 
 #
@@ -178,37 +193,37 @@ fi
 source /usr/share/nvim/init-nvim.sh
 
 #forground terminal colors
-black=$(tput setaf 0) # \e[30m
-red=$(tput setaf 1) # \e[31m
-green=$(tput setaf 2) # \e[32m
-yellow=$(tput setaf 3) # \e[33m
-blue=$(tput setaf 4) # \e[34m
-purple=$(tput setaf 5) # \e[35m
-myGreenCyan=$(tput setaf 6) # \e[36m
-grey=$(tput setaf 7) # \e[37m
-defaultColor=$(tput setaf 9) # \e[39m
+black="\[$(tput setaf 0)\]" # \e[30m
+red="\[$(tput setaf 1)\]" # \e[31m
+green="\[$(tput setaf 2)\]" # \e[32m
+yellow="\[$(tput setaf 3)\]" # \e[33m
+blue="\[$(tput setaf 4)\]" # \e[34m
+purple="\[$(tput setaf 5)\]" # \e[35m
+myGreenCyan="\[$(tput setaf 6)\]" # \e[36m
+grey="\[$(tput setaf 7)\]" # \e[37m
+defaultColor="\[$(tput setaf 9)\]" # \e[39m
 
 #background terminal colors
-backgroundBlack=$(tput setaf 0) # \e[40m
-backgroundRed=$(tput setaf 1) # \e[41m
-backgroundGreen=$(tput setaf 2) # \e[42m
-backgroundYellow=$(tput setaf 3) # \e[43m
-backgroundBlue=$(tput setaf 4) # \e[44m
-backgroundPurple=$(tput setaf 5) # \e[45m
-backgroundMyGreenCyan=$(tput setaf 6) # \e[46m
-backgroundGrey=$(tput setaf 7) # \e[47m
-backgroundDefaultColor=$(tput setaf 9) # \e[49m
+backgroundBlack="\[$(tput setaf 0)\]" # \e[40m
+backgroundRed="\[$(tput setaf 1)\]" # \e[41m
+backgroundGreen="\[$(tput setaf 2)\]" # \e[42m
+backgroundYellow="\[$(tput setaf 3)\]" # \e[43m
+backgroundBlue="\[$(tput setaf 4)\]" # \e[44m
+backgroundPurple="\[$(tput setaf 5)\]" # \e[45m
+backgroundMyGreenCyan="\[$(tput setaf 6)\]" # \e[46m
+backgroundGrey="\[$(tput setaf 7)\]" # \e[47m
+backgroundDefaultColor="\[$(tput setaf 9)\]" # \e[49m
 
 # general terminal text attributes
 # if desired with a color attribute then format like:
 # \[$bright;$cyan\]
 # with the semicolon (;)
-reset=$(tput sgr0)   # \e[0m;
-bright=$(tput bold) # \e[1m;
-dim=$(tput dim) # \e[2m;
-italics=$(tput smso) # \e[3m;
-underscore=$(tput smul) # \e[4m;
-blink=$(tput blink) # \e[5m;
+reset="\[$(tput sgr0)\]"   # \e[0m;
+bright="\[$(tput bold)\]" # \e[1m;
+dim="\[$(tput dim)\]" # \e[2m;
+italics="\[$(tput smso)\]" # \e[3m;
+underscore="\[$(tput smul)\]" # \e[4m;
+blink="\[$(tput blink)\]" # \e[5m;
 
 function defaultPrompt () {
 export PS1="\
