@@ -61,75 +61,7 @@ Section "InputClass"
 EndSection
 EOF'
 
-# install termite
-echo "installing termite terminal emulator"
-sudo pacman -S --noconfirm termite
-
-
-# get termite color schemes
-echo "cloning termite color schemes"
-echo "making git directory"
-mkdir -p ~/git
-cd ~/git
-if [[ -d ~/git/base16-termite ]]
-then
-  echo "removing existing termite color scheme directories"
-  rm -rf ~/git/base16-termite
-fi
-git clone https://github.com/khamer/base16-termite.git
-
-# move monokai termite theme to the termite config dir
-echo "creating termite config dir and moving monokai into that dir"
-mkdir -p ~/.config/termite
-cp ~/git/base16-termite/themes/base16-monokai.config ~/.config/termite/config
-
-# other gree color options:
-# b1be2c, a8b14c, b7c42d
-# increase default termite size from 9 (default) to 13
-echo "increasing default terminal font size"
-cat << EOF >> ~/.config/termite/config
-[options]
-font = Monospace 13
-scrollback_lines = 100000
-EOF
-
-# replacing the comments with my green color
-sed -ri 's:color6\s*=\s*#[a-z0-9]{6}:color6  = #afbc2b:g' ~/.config/termite/config
-sed -ri 's:color14\s*=\s*#[a-z0-9]{6}:color14 = #afbc2b:g' ~/.config/termite/config
-sed -ri 's:(cursor\s*)=\s*#[a-z0-9]{6}:\1= #939390:g' ~/.config/termite/config
-sed -ri 's:(color7\s*)=\s*#[a-z0-9]{6}:\1= #a8a9a6:g' ~/.config/termite/config
-
-echo "creating file for new ssh connections to fix termite issue"
-cat << EOF >> ~/newSSHConnection.sh
-infocmp > termite.terminfo
-scp termite.terminfo \$1:
-ssh \$1 'tic -x termite.terminfo'
-EOF
-
-# adding gnupg for gpg-agent to manage ssh keys
-cat << 'EOF' >> $HOME/.bashrc
-# set gpg-agent as default
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
-EOF
-
-#setup other tools not required for install
-sudo pacman -S --noconfirm mlocate
-
-
-# mlocate database cronjob
-
-# set program for ssh key passphrase entering
-# also set the pinentry program to start in the active terminal not the first terminal
-mkdir -p $HOME/.gnupg
-echo "pinentry-program /usr/bin/pinentry-curses" > $HOME/.gnupg/gpg-agent.conf
-echo 'Match host * exec "gpg-connect-agent UPDATESTARTUPTTY /bye"' >> ~/.ssh/config
 
 echo "If you would like to use eatthoselemons linux config run eatthoselemonsLinuxConfig.sh"
 echo "To start a display manager run 'startx {display manager}'"
 echo "so you could run 'startx xmonad' to start the xmonad display manager"
-echo "if you need to enable termite on a remote server run: bash ~/newSSHConnection.sh <ip address>"
