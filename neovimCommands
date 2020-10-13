@@ -1,3 +1,0 @@
-:call mkdir(stdpath('config'), 'p')
-:exe 'edit '.stdpath('config'). '/init.vim'
-:q
