@@ -26,29 +26,80 @@ else
 fi
 
 # download the next step in the install process
-wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
+curl -o init2.sh https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
 
 # set time to use network time protocol
 timedatectl set-ntp true
 
+# simple vs detailed, lsblk vs fdisk
 printf "\n===========================================\n"
-echo "now running fdisk"
+echo "select a disk"
+echo "simple or detailed disk information? (simple(s)/detailed(d)"
+read diskShowTypeInput
+diskShowType=detailed
 
-# select disk to be overwritten
-if fdisk -l >> /dev/null;
+if [[ $diskShowTypeInput =~ ^.*simple.*$ ]]
 then
-  fdisk -l
-  printf "\n\n===========================================\n"
-  echo "Which disk to use? input format 'sd'letter or sd[a-z]"
-  read disk
-else
-  echo "fdisk not supported on this version of linux"
-  exit 1
+  $diskShowType=simple
 fi
 
-efiPartition=${disk}1
-swapPartition=${disk}2
-rootPartition=${disk}3
+if [[ $diskShowtypeInput =~ ^.*s.*$ ]]
+then
+  $diskShowType=simple
+fi
+ 
+# detailed disk format uses fdisk
+if [[ $diskShowType = "detailed" ]]
+then
+  printf "\n===========================================\n"
+  echo "now running fdisk"
+  # select disk to be overwritten
+  if fdisk -l >> /dev/null;
+  then
+    fdisk -l
+    printf "\n\n===========================================\n"
+    echo "Which disk to use? input format 'sd'letter or sd[a-z]"
+    echo "nvme format 'nvme[0-9]n[0-9]' example 'nvme0n1'"
+    read disk
+  else
+    echo "fdisk not supported on this version of linux"
+    exit 1
+  fi
+fi
+
+# simple disk show format, uses lsblk
+if [[ $diskShowType = "simple" ]]
+then
+  printf "\n===========================================\n"
+  echo "now running lsblk"
+  # select disk to be overwritten
+  if lsblk >> /dev/null;
+  then
+    lsblk
+    printf "\n\n===========================================\n"
+    echo "Which disk to use? input format 'sd'letter or sd[a-z]"
+    read disk
+  else
+    echo "lsblk not supported on this version of linux"
+    exit 1
+  fi
+fi
+
+# check if is nvme drive, set partitions appropriately
+if [[  $disk =~ ^.*nvme.*$ ]]
+then
+  efiPartition=${disk}p1
+  swapPartition=${disk}p2
+  rootPartition=${disk}p3
+fi
+
+# check if in sd[a-z] format and set partitions appropriately
+if [[ $disk =~ ^.*sd.*$ ]]
+then
+  efiPartition=${disk}1
+  swapPartition=${disk}2
+  rootPartition=${disk}3
+fi
 
 # unmount any partitions that are mounted
 # unmount /mnt/efi (efiPartition) before
