@@ -27,7 +27,7 @@ Use the boot screen to boot into the iso (Once powered on repeatedly press the b
 
 ### In the boot Screen
 run the following command:
-`wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init.sh`
+`curl -o init.sh https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init.sh`
 
 Then run `bash init.sh` and follow the prompts
 
