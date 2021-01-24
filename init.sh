@@ -27,6 +27,7 @@ fi
 
 # download the next step in the install process
 curl -o init2.sh https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
+mv init2.sh /root/
 
 # set time to use network time protocol
 timedatectl set-ntp true
@@ -78,6 +79,7 @@ then
     lsblk
     printf "\n\n===========================================\n"
     echo "Which disk to use? input format 'sd'letter or sd[a-z]"
+    echo "nvme format 'nvme[0-9]n[0-9]' example 'nvme0n1'"
     read disk
   else
     echo "lsblk not supported on this version of linux"
