@@ -95,17 +95,21 @@ read regularUsername
 if ! id "$regularUsername"
 then
   useradd -m $regularUsername
-
-  until passwd $regularUsername
-  do
-    echo "non matching try again"
-    sleep 1
-  done
-  echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
 else
-  echo "user already exists"
+  echo "user already exists, not creating a new user"
 fi
 
+# check if already in the sudoers file if not then add
+if (( ! grep -Fxq "$regularUsername" /etc/sudoers ))
+then
+  echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
+fi
+
+until passwd $regularUsername
+do
+  echo "non matching try again"
+  sleep 1
+done
 # make sure system has wget
 pacman -S --noconfirm wget reflector
 
