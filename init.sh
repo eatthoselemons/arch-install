@@ -221,4 +221,5 @@ genfstab -U /mnt >> /mnt/etc/fstab
 mv init2.sh /mnt/root/
 echo "$rootPartition" > /mnt/root/rootPartition
 
-echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script"
+printf "\n===========================================\n"
+echo "setup complete, chroot with 'arch-chroot /mnt' and run the init2.sh script located in /root/"
