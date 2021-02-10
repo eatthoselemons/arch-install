@@ -100,7 +100,7 @@ else
 fi
 
 # check if already in the sudoers file if not then add
-if (( ! grep -Fxq "$regularUsername" /etc/sudoers ))
+if ( ! grep -Fxq "$regularUsername ALL=(ALL) ALL" /etc/sudoers )
 then
   echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
 fi
