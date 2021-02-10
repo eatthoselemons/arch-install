@@ -25,7 +25,6 @@ read cpu
 # stored file
 file="/root/rootPartition"
 rootPartition=$(cat "$file")
-rm /root/rootPartition
 
 # processor 0=unknown 1=intel 2=amd
 # case insensitive regex selection
@@ -200,6 +199,10 @@ fi
 # Make sure that dhcp will be enabled on restart,
 # is not enabled by default
 sudo systemctl enable dhcpcd.service
+
+# cleaning up
+echo "cleaning up"
+rm /root/rootPartition
 
 echo "Your system is all setup! run 'exit' then 'shutdown now' to shutdown. Remove the installation media and then start the system"
 echo "for xmonad, sound configuration, terminal size changes, and no mouse acceleration run 'bash firstStartup.sh' when you log in"
