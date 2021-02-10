@@ -11,11 +11,17 @@ ls /usr/share/zoneinfo
 echo "regions ^^"
 echo "What Region are you in?"
 read region
+correctedRegion=$(echo "$region" | awk '{ print toupper(substr($0,1,1)) tolower(substr($0,2)); }')
 printf "\n===========================================\n"
-ls /usr/share/zoneinfo/$region
+ls /usr/share/zoneinfo/$correctedRegion
 echo "cities ^^"
 echo "What city are you in?"
 read city
+correctedCity=$(echo "$city" | awk '{ print toupper(substr($0,1,1)) tolower(substr($0,2)); }')
+
+# set clock zone
+ln -sf /usr/share/zoneinfo/$correctedRegion/$correctedCity /etc/localtime
+hwclock --systohc
 
 printf "\n===========================================\n"
 echo "What is the system hostname?"
@@ -124,10 +130,6 @@ chown $regularUsername:$regularUsername /home/$regularUsername/firstStartup.sh
 wget https://raw.githubusercontent.com/eatthoselemons/arch-install/master/eatthoselemonsLinuxConfig.sh
 chown $regularUsername:$regularUsername /home/$regularUsername/eatthoselemonsLinuxConfig.sh
 
-
-# set clock zone
-ln -sf /usr/share/zoneinfo/$region/$city /etc/localtime
-hwclock --systohc
 
 if [[ ! -f /etc/locale.conf ]]
 then
