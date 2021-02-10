@@ -3,6 +3,7 @@ trap_msg='s=${?}; echo "${0}: Error on line "${LINENO}": ${BASH_COMMAND}"; exit 
 set -uo pipefail
 trap "${trap_msg}" ERR
 
+printf "\n===========================================\n"
 echo "you need region and city the regions and city can be found at: /usr/share/zoneinfo/region/city"
 
 # grab zone info for clock
@@ -10,14 +11,17 @@ ls /usr/share/zoneinfo
 echo "regions ^^"
 echo "What Region are you in?"
 read region
+printf "\n===========================================\n"
 ls /usr/share/zoneinfo/$region
 echo "cities ^^"
 echo "What city are you in?"
 read city
 
+printf "\n===========================================\n"
 echo "What is the system hostname?"
 read hostname
 
+printf "\n===========================================\n"
 echo "what processor do you have AMD or Intel?"
 read cpu
 
@@ -48,6 +52,7 @@ else
 fi
 
 
+printf "\n===========================================\n"
 echo "what graphics do you have AMD, nVidia, or Intel?"
 read gpu
 
@@ -77,6 +82,7 @@ then
 else
   echo "you have gpu $gpu"
 fi
+printf "\n===========================================\n"
 echo "set root password"
 passwd
 
