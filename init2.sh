@@ -84,14 +84,23 @@ else
 fi
 printf "\n===========================================\n"
 echo "set root password"
-passwd
+until passwd
+do
+  echo "non matching try again"
+  sleep 1
+done
 
 echo "what is the user account name?"
 read regularUsername
 if ! id "$regularUsername"
 then
   useradd -m $regularUsername
-  passwd $regularUsername
+
+  until passwd $regularUsername
+  do
+    echo "non matching try again"
+    sleep 1
+  done
   echo "$regularUsername ALL=(ALL) ALL" >> /etc/sudoers
 else
   echo "user already exists"
