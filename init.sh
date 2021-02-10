@@ -200,11 +200,11 @@ mount /dev/${rootPartition} /mnt
 mkdir -p /mnt/efi
 mount /dev/${efiPartition} /mnt/efi
 
-# install reflector for checking package repos
-pacman -Sy reflector
+# install reflector for checking package repos and dependencies
+pacman -Sy reflector python3 glibc
 
 # check latest 100 package mirrors and sort by the fastest
-reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --verbose --latest 50 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install essential packages
 pacstrap /mnt base linux linux-firmware vim vi dhcpcd sudo iputils
