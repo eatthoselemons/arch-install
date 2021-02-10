@@ -27,7 +27,6 @@ fi
 
 # download the next step in the install process
 curl -o init2.sh https://raw.githubusercontent.com/eatthoselemons/arch-install/master/init2.sh
-mv init2.sh /root/
 
 # set time to use network time protocol
 timedatectl set-ntp true
