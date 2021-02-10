@@ -40,12 +40,12 @@ diskShowType=detailed
 
 if [[ $diskShowTypeInput =~ ^.*simple.*$ ]]
 then
-  $diskShowType=simple
+  diskShowType=simple
 fi
 
-if [[ $diskShowtypeInput =~ ^.*s.*$ ]]
+if [[ $diskShowTypeInput =~ ^.*s.*$ ]]
 then
-  $diskShowType=simple
+  diskShowType=simple
 fi
  
 # detailed disk format uses fdisk
