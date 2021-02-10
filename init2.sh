@@ -98,7 +98,7 @@ else
 fi
 
 # make sure system has wget
-pacman -S wget reflector
+pacman -S --noconfirm wget reflector
 
 cd /home/$regularUsername/
 
@@ -166,7 +166,7 @@ cp -a /boot/initramfs-linux-fallback.img /efi/EFI/kernels
 # grab ucode based on processor type
 if [[ $processor == 1 ]]
 then
-  pacman -S intel-ucode
+  pacman -S --noconfirm intel-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/intel-ucode.img" >> /efi/loader/entries/arch.conf
   cp -a /boot/intel-ucode.img /efi/EFI/kernels
@@ -174,7 +174,7 @@ fi
 
 if [[ $processor == 2 ]]
 then
-  pacman -S amd-ucode
+  pacman -S --noconfirm amd-ucode
   bootctl --path=/efi install
   echo "initrd  EFI/kernels/amd-ucode.img" >> /efi/loader/entries/arch.conf
   cp -a /boot/amd-ucode.img /efi/EFI/kernels
@@ -191,15 +191,15 @@ echo "/efi/EFI/kernels /boot none defaults,bind 0 0" >> /etc/fstab
 # install graphics driver based on previously input gpu manufacturer
 if [[ $graphics == 1 ]]
 then
-  pacman -S xf86-video-intel
+  pacman -S --noconfirm xf86-video-intel
 fi
 if [[ $graphics == 2 ]]
 then
-  pacman -S xf86-video-amdgpu
+  pacman -S --noconfirm xf86-video-amdgpu
 fi
 if [[ $graphics == 3 ]]
 then
-  pacman -S xf86-video-nouveau
+  pacman -S --noconfirm xf86-video-nouveau
 fi
 
 # Make sure that dhcp will be enabled on restart,
