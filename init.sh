@@ -201,7 +201,7 @@ mkdir -p /mnt/efi
 mount /dev/${efiPartition} /mnt/efi
 
 # install reflector for checking package repos and dependencies
-pacman -Sy reflector python3 glibc
+pacman -Sy --noconfirm reflector python3 glibc
 
 # check latest 100 package mirrors and sort by the fastest
 reflector --verbose --latest 50 --sort rate --save /etc/pacman.d/mirrorlist
